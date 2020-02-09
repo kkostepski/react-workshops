@@ -1,19 +1,12 @@
 {
-  "name": "reveal.js",
-  "version": "3.9.2",
-  "description": "The HTML Presentation Framework",
-  "homepage": "http://revealjs.com",
-  "subdomain": "revealjs",
+  "name": "react-workshops",
+  "version": "0.0.1",
+  "description": "React workshops - presentation",
   "main": "js/reveal.js",
   "scripts": {
     "test": "grunt test",
     "start": "grunt serve",
     "build": "grunt"
-  },
-  "author": {
-    "name": "Hakim El Hattab",
-    "email": "hakim.elhattab@gmail.com",
-    "web": "http://hakim.se"
   },
   "repository": {
     "type": "git",
