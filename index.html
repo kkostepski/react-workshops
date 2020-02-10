@@ -16,6 +16,12 @@
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="lib/css/monokai.css" />
 
+    <style type="text/css">
+      section h4 {
+        color: #f92672 !important;
+      }
+    </style>
+
     <!-- Printing and PDF exports -->
     <script>
       var link = document.createElement("link");
@@ -31,14 +37,12 @@
     <div class="reveal">
       <div class="slides">
         <section>
-          React workshops
+          <h1>React workshops</h1>
         </section>
 
         <section>
-          Overview:
-
           <section>
-            Part 1:
+            <h2>Part 1</h2>
             <div>
               <ul>
                 <li>New ECMAScript features</li>
@@ -50,7 +54,7 @@
           </section>
 
           <section>
-            Part 2:
+            <h2>Part 2</h2>
             <div>
               <ul>
                 <li>Build simple React App</li>
@@ -60,14 +64,15 @@
         </section>
 
         <section>
-          New ECMAScript features
+          <h2>New ECMAScript features</h2>
         </section>
         <section>
           <section>
-            var, let, const
+            <h3>var, let, const</h3>
           </section>
           <section>
             <section>
+              <h4>var vs. let</h4>
               <pre><code data-trim data-noescape>
 					// ES5
 					var a = 5; // global scope, function scope
@@ -79,7 +84,7 @@
           </section>
 
           <section>
-            example: var
+            <h4>example - var</h4>
             <pre><code data-trim data-noescape>
 					var elements = ['A', 'B', 'C'];
 	
@@ -91,7 +96,7 @@
 				</code></pre>
           </section>
           <section>
-            example: let
+            <h4>example - let</h4>
             <pre><code data-trim data-noescape>
 					var elements = ['A', 'B', 'C'];
 	
@@ -101,22 +106,21 @@
 	
 					console.log(i); // Uncaught ReferenceError: i is not defined
 				</code></pre>
-		  </section>
-		  <section>
-            example: let vs. const
+          </section>
+          <section>
+            <h4>example - let vs. const</h4>
             <pre><code data-trim data-noescape>
 				let a = 5;
 				a = 3;
 
 				console.log(a); // will print 3
-
 				
 				const a = 5;
 				a = 3; // Uncaught TypeError: Assignment to constant variable.
 			</code></pre>
-		  </section>
-		  <section>
-            example: let vs. const
+          </section>
+          <section>
+            <h4>example - let vs. const</h4>
             <pre><code data-trim data-noescape>
 				const a = [1, 2, 3];
 				a.push(4); // OK, it's not reassignment
@@ -124,16 +128,16 @@
 				const a = { a: 'A', b: 'B'};
 				a['c'] = 'C'; // OK
 			</code></pre>
-          </section>          
+          </section>
         </section>
 
         <section>
           <section>
-            arrow functions
+            <h3>arrow functions</h3>
           </section>
 
           <section>
-            <div>ES 5</div>
+            <h4>ES 5</h4>
             <pre><code data-trim data-noescape>
               var a = function() {
                 return 'a';
@@ -146,7 +150,7 @@
           </section>
 
           <section>
-            <div>ES 6</div>
+            <h4>ES 6</h4>
             <pre><code data-trim data-noescape>
               const a = () => {
                 return 'a';
@@ -157,16 +161,16 @@
           </section>
 
           <section>
-            <div>Lexical this</div>
+            <h4>Lexical this</h4>
+            <h5>ES 5</h5>
             <pre><code data-trim data-noescape>
-              // ES5
               var a = (function() {
                 return 'a';
               }).bind(this);              
             </code></pre>
 
+            <h5>ES 6</h5>
             <pre><code data-trim data-noescape>
-              // ES6
               const a = () => {
                 return 'a';
               }
@@ -176,13 +180,13 @@
 
         <section>
           <section>
-            functions - parameter handling
+            <h3>functions - parameter handling</h3>
           </section>
 
           <section>
-            default argument value
+            <h4>default argument value</h4>
+            <h5>ES 5</h5>
             <pre><code data-trim data-noescape>
-              // ES5
               var func = function(a) {
                 if (typeof a === 'undefined') {
                   a = 2;
@@ -192,8 +196,8 @@
               }
             </code></pre>
 
+            <h5>ES 6</h5>
             <pre><code data-trim data-noescape>
-              // ES6
               const func = (a = 2) => {
                 return a;
               }
@@ -204,40 +208,277 @@
           </section>
 
           <section>
-            rest parameter
+            <h4>rest parameter</h4>
+            <h5>ES 5</h5>
             <pre><code data-trim data-noescape>
-              // ES5
               function func (a, b) {
                 var rest = Array.prototype.slice.call(arguments, 2);
                 
                 return a + ',' + b + ',' + rest.join(',');
               };
             </code></pre>
-  
+
+            <h5>ES 6</h5>
             <pre><code data-trim data-noescape>
-              // ES6
+              const func = (a, b, ...rest) => {
+                return a + ',' + b + ',' + rest.join(',');
+              }
+            </code></pre>
+            <pre><code data-trim data-noescape>
               const func = (a, b, ...rest) => a + ',' + b + ',' + rest.join(',');
             </code></pre>
           </section>
 
           <section>
-            spread operator
+            <h4>spread operator</h4>
+            <h5>ES 5</h5>
             <pre><code data-trim data-noescape>
-              // ES5
-              var params = [4, 5, 6];
+			  var params = [4, 5, 6];
 
-              [1, 2, 3].concat(params2); // [1, 2, 3, 4, 5, 6]
-            </code></pre>
-  
+			  [1, 2, 3].concat(params2); // [1,2,3,4,5,6]
+			</code></pre>
+
+            <h5>ES 6</h5>
             <pre><code data-trim data-noescape>
               // ES6
               const params = [4, 5, 6];
 
-              [1, 2, 3, ...params2]; // [1, 2, 3, 4, 5, 6]
+              [1, 2, 3, ...params2]; // [1,2,3,4,5,6]
             </code></pre>
           </section>
         </section>
 
+        <section>
+          <section>
+            <h3>Destructuring</h3>
+          </section>
+
+          <section>
+            <h4>array matching</h4>
+            <div>example 1</div>
+            <pre><code data-trim data-noescape>
+          const list = [ 1, 2, 3 ];
+          const [ a, b, c ] = list;
+        </code></pre>
+            <div>example 2</div>
+            <pre><code data-trim data-noescape>
+          const list = [ 1, 2, 3 ];
+          const [ a,,b ] = list;
+        </code></pre>
+          </section>
+
+          <section>
+            <h4>object Matching</h4>
+            <div>example</div>
+            <pre><code data-trim data-noescape>
+          const object = {
+            name: 'Konrad',
+            age: 18,
+            hobby: 'drums'
+          };
+
+          const { name, age, hobby } = object;
+        </code></pre>
+            <div>example - default values</div>
+            <pre><code data-trim data-noescape>
+          const object = {
+            name: 'Konrad',
+            hobby: 'drums'
+          };
+
+          const { name, age = 18, hobby } = object;
+        </code></pre>
+          </section>
+
+          <section>
+            <h4>object matching - function arguments</h4>
+            <div>example 1</div>
+            <pre><code data-trim data-noescape>
+          const func = (props) {
+            const { name, value } = props;
+            console.log(name, value);
+          }
+        </code></pre>
+            <div>example 2</div>
+            <pre><code data-trim data-noescape>
+          const func = ({ name, value }) {
+            console.log(name, value);
+          }
+        </code></pre>
+            <div>equivalent to:</div>
+            <pre><code data-trim data-noescape>
+          const func = (props) {
+            console.log(props.name, props.value);
+          }
+        </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3>template strings</h3>
+          </section>
+          <section>
+            <h5>ES 5</h5>
+            <pre><code data-trim data-noescape>
+          function func(a, b) {
+            var rest = Array.prototype.slice.call(arguments, 2);
+            
+            return a + ',' + b + ',' + rest.join(',');
+          };
+        </code></pre>
+
+            <h5>ES 6</h5>
+            <pre><code data-trim data-noescape>
+          const func = (a, b, ...rest) => {
+            return `${a}, ${b}, ${rest.join(',')}`;
+          }
+        </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3>object property shorthand</h3>
+          </section>
+          <section>
+            <h5>ES 5</h5>
+            <pre><code data-trim data-noescape>
+        var x = 0, y = 0;
+        obj = { x: x, y: y };
+      </code></pre>
+
+            <h5>ES 6</h5>
+            <pre><code data-trim data-noescape>
+        const x = 0, y = 0;
+        obj = { x, y };
+      </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3>exports</h3>
+          </section>
+          <section>
+            <h4>export (named)</h4>
+            <h5>example 1</h5>
+            <pre><code data-trim data-noescape>
+            export const App = ({ children }) => {
+              return &ltdiv&gt{children}&lt/div&gt;
+            }
+          </code></pre>
+
+            <h5>example 2</h5>
+            <pre><code data-trim data-noescape>
+            const App = ({ children }) => {
+              return &ltdiv&gt{children}&lt/div&gt;
+            }
+
+            export { App };
+          </code></pre>
+          </section>
+
+          <section>
+            <h4>import (named)</h4>
+            <pre><code data-trim data-noescape>
+            // exactly name must be specified
+
+            import { App } from './file.js';
+          </code></pre>
+          </section>
+
+          <section>
+            <h4>export (unnamed)</h4>
+            <h5>example 1</h5>
+            <pre><code data-trim data-noescape>
+            const App = ({ children }) => {
+              return &ltdiv&gt{children}&lt/div&gt;
+            }
+
+            export default App;
+          </code></pre>
+
+            <h5>example 2</h5>
+            <pre><code data-trim data-noescape>
+            export default ({ children }) => {
+              return &ltdiv&gt{children}&lt/div&gt;
+            }
+          </code></pre>
+          </section>
+
+          <section>
+            <h4>import (unnamed)</h4>
+            <pre><code data-trim data-noescape>
+            /* name can be any */
+
+            import App from './file.js';
+
+            import AnotherAppName from './file.js';
+          </code></pre>
+          </section>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h3>classes</h3>
+        </section>
+        <section>
+          <h5>example</h5>
+          <pre><code data-trim data-noescape>
+            class Shape {
+              constructor(id, x, y) {
+                  this.id = id
+                  this.move(x, y)
+              }
+
+              move(x, y) {
+                  this.x = x
+                  this.y = y
+              }
+            }
+          </code></pre>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h3>async / await</h3>
+        </section>
+        <section>
+          <h5>example</h5>
+          <pre><code data-trim data-noescape>
+            const fetchData = () => {
+              /* asynchronous function */
+            }
+
+            const msg = async () => {
+              const data = await fetchData();
+
+              console.log('data:', data);
+            }
+          </code></pre>
+        </section>
+
+        <section>
+          <h5>example - with error handling</h5>
+          <pre><code data-trim data-noescape>
+            const fetchData = () => {
+              /* asynchronous function */
+            }
+
+            const msg = async () => {
+              try {
+                const data = await fetchData();
+
+                console.log('data:', data);
+              } catch(err) {
+                throw new Error(err);
+              }
+            }
+          </code></pre>
+        </section>
       </section>
       </div>
     </div>
