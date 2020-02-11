@@ -73,61 +73,76 @@
           <section>
             <section>
               <h4>var vs. let</h4>
+              <h5>ES 5</h5>
               <pre><code data-trim data-noescape>
-					// ES5
-					var a = 5; // global scope, function scope
-	
-					// ES6
-					let a = 5 // block scope
-				  </code></pre>
+                /* global scope, function scope */
+                var a = 5;
+              </code></pre>
+
+              <h5>ES 6</h5>
+              <pre><code data-trim data-noescape>
+                /* block scope */
+                let a = 5
+              </code></pre>
             </section>
           </section>
 
           <section>
             <h4>example - var</h4>
             <pre><code data-trim data-noescape>
-					var elements = ['A', 'B', 'C'];
-	
-					for (var i = 0; i < elements.length; i++) {
-					  console.log('element: ', elements[i]);
-					}
-	
-					console.log(i); // will print 3
-				</code></pre>
+              var elements = ['A', 'B', 'C'];
+      
+              for (var i = 0; i < elements.length; i++) {
+                console.log('element: ', elements[i]);
+              }
+
+              console.log(i); /* will print 3 */
+				    </code></pre>
           </section>
           <section>
             <h4>example - let</h4>
             <pre><code data-trim data-noescape>
-					var elements = ['A', 'B', 'C'];
-	
-					for (let i = 0; i < elements.length; i++) {
-					  console.log('element: ', elements[i]);
-					}
-	
-					console.log(i); // Uncaught ReferenceError: i is not defined
-				</code></pre>
+              var elements = ['A', 'B', 'C'];
+      
+              for (let i = 0; i < elements.length; i++) {
+                console.log('element: ', elements[i]);
+              }
+
+              console.log(i);
+              /* Uncaught ReferenceError: i is not defined */
+				    </code></pre>
           </section>
           <section>
-            <h4>example - let vs. const</h4>
+            <h4>example 1 - let vs. const</h4>
+            <h5>let</h5>
             <pre><code data-trim data-noescape>
-				let a = 5;
-				a = 3;
+              let a = 5;
+              a = 3;
 
-				console.log(a); // will print 3
-				
-				const a = 5;
-				a = 3; // Uncaught TypeError: Assignment to constant variable.
-			</code></pre>
+              console.log(a); /* will print 3 */
+            </code></pre>
+
+            <h5>const</h5>
+            <pre><code data-trim data-noescape>
+              const a = 5;
+              a = 3;
+              /* Uncaught TypeError: Assignment to constant variable. */
+            </code></pre>
           </section>
           <section>
-            <h4>example - let vs. const</h4>
+            <h4>example 2 - const array</h4>
             <pre><code data-trim data-noescape>
-				const a = [1, 2, 3];
-				a.push(4); // OK, it's not reassignment
+              const a = [1, 2, 3];
+              a.push(4); /* OK, it's not reassignment */
+            </code></pre>
+          </section>
 
-				const a = { a: 'A', b: 'B'};
-				a['c'] = 'C'; // OK
-			</code></pre>
+          <section>
+            <h4>example 3 - const object</h4>
+            <pre><code data-trim data-noescape>
+              const a = { a: 'A', b: 'B'};
+              a['c'] = 'C'; /* OK */
+            </code></pre>
           </section>
         </section>
 
@@ -137,7 +152,8 @@
           </section>
 
           <section>
-            <h4>ES 5</h4>
+            <h4>Declaring function</h4>
+            <h5>ES 5</h5>
             <pre><code data-trim data-noescape>
               var a = function() {
                 return 'a';
@@ -150,7 +166,8 @@
           </section>
 
           <section>
-            <h4>ES 6</h4>
+            <h4>Declaring function</h4>
+            <h5>ES 6</h5>
             <pre><code data-trim data-noescape>
               const a = () => {
                 return 'a';
@@ -168,7 +185,10 @@
                 return 'a';
               }).bind(this);              
             </code></pre>
+          </section>
 
+          <section>
+            <h4>Lexical this</h4>
             <h5>ES 6</h5>
             <pre><code data-trim data-noescape>
               const a = () => {
@@ -195,14 +215,17 @@
                 return a;
               }
             </code></pre>
+          </section>
 
+          <section>
+            <h4>default argument value</h4>
             <h5>ES 6</h5>
             <pre><code data-trim data-noescape>
               const func = (a = 2) => {
                 return a;
               }
 
-              // shorthand
+              /* or shorthand */
               const func = (a = 2) => a;
             </code></pre>
           </section>
@@ -217,7 +240,10 @@
                 return a + ',' + b + ',' + rest.join(',');
               };
             </code></pre>
+          </section>
 
+          <section>
+            <h4>rest parameter</h4>
             <h5>ES 6</h5>
             <pre><code data-trim data-noescape>
               const func = (a, b, ...rest) => {
@@ -233,17 +259,19 @@
             <h4>spread operator</h4>
             <h5>ES 5</h5>
             <pre><code data-trim data-noescape>
-			  var params = [4, 5, 6];
+              var params = [4, 5, 6];
 
-			  [1, 2, 3].concat(params2); // [1,2,3,4,5,6]
-			</code></pre>
+              [1, 2, 3].concat(params2); /* [1,2,3,4,5,6] */
+            </code></pre>
+          </section>
 
+          <section>
+            <h4>spread operator</h4>
             <h5>ES 6</h5>
             <pre><code data-trim data-noescape>
-              // ES6
               const params = [4, 5, 6];
 
-              [1, 2, 3, ...params2]; // [1,2,3,4,5,6]
+              [1, 2, 3, ...params2]; /* [1,2,3,4,5,6] */
             </code></pre>
           </section>
         </section>
@@ -319,79 +347,83 @@
             <h3>template strings</h3>
           </section>
           <section>
+            <h4>Template strings</h4>
             <h5>ES 5</h5>
             <pre><code data-trim data-noescape>
-          function func(a, b) {
-            var rest = Array.prototype.slice.call(arguments, 2);
-            
-            return a + ',' + b + ',' + rest.join(',');
-          };
-        </code></pre>
+              function func(a, b) {
+                var rest = Array.prototype.slice.call(arguments, 2);
+                
+                return a + ',' + b + ',' + rest.join(',');
+              };
+            </code></pre>
+          </section>
 
+          <section>
+            <h4>Template strings</h4>
             <h5>ES 6</h5>
             <pre><code data-trim data-noescape>
-          const func = (a, b, ...rest) => {
-            return `${a}, ${b}, ${rest.join(',')}`;
-          }
-        </code></pre>
+              const func = (a, b, ...rest) => {
+                return `${a}, ${b}, ${rest.join(',')}`;
+              }
+            </code></pre>
           </section>
         </section>
 
-        <section>
           <section>
-            <h3>object property shorthand</h3>
-          </section>
-          <section>
-            <h5>ES 5</h5>
-            <pre><code data-trim data-noescape>
+            <section>
+              <h3>object property shorthand</h3>
+            </section>
+            <section>
+              <h5>ES 5</h5>
+              <pre><code data-trim data-noescape>
         var x = 0, y = 0;
         obj = { x: x, y: y };
       </code></pre>
 
-            <h5>ES 6</h5>
-            <pre><code data-trim data-noescape>
+              <h5>ES 6</h5>
+              <pre><code data-trim data-noescape>
         const x = 0, y = 0;
         obj = { x, y };
       </code></pre>
+            </section>
           </section>
-        </section>
 
-        <section>
           <section>
-            <h3>exports</h3>
-          </section>
-          <section>
-            <h4>export (named)</h4>
-            <h5>example 1</h5>
-            <pre><code data-trim data-noescape>
+            <section>
+              <h3>exports</h3>
+            </section>
+            <section>
+              <h4>export (named)</h4>
+              <h5>example 1</h5>
+              <pre><code data-trim data-noescape>
             export const App = ({ children }) => {
               return &ltdiv&gt{children}&lt/div&gt;
             }
           </code></pre>
 
-            <h5>example 2</h5>
-            <pre><code data-trim data-noescape>
+              <h5>example 2</h5>
+              <pre><code data-trim data-noescape>
             const App = ({ children }) => {
               return &ltdiv&gt{children}&lt/div&gt;
             }
 
             export { App };
           </code></pre>
-          </section>
+            </section>
 
-          <section>
-            <h4>import (named)</h4>
-            <pre><code data-trim data-noescape>
+            <section>
+              <h4>import (named)</h4>
+              <pre><code data-trim data-noescape>
             // exactly name must be specified
 
             import { App } from './file.js';
           </code></pre>
-          </section>
+            </section>
 
-          <section>
-            <h4>export (unnamed)</h4>
-            <h5>example 1</h5>
-            <pre><code data-trim data-noescape>
+            <section>
+              <h4>export (unnamed)</h4>
+              <h5>example 1</h5>
+              <pre><code data-trim data-noescape>
             const App = ({ children }) => {
               return &ltdiv&gt{children}&lt/div&gt;
             }
@@ -399,34 +431,34 @@
             export default App;
           </code></pre>
 
-            <h5>example 2</h5>
-            <pre><code data-trim data-noescape>
+              <h5>example 2</h5>
+              <pre><code data-trim data-noescape>
             export default ({ children }) => {
               return &ltdiv&gt{children}&lt/div&gt;
             }
           </code></pre>
-          </section>
+            </section>
 
-          <section>
-            <h4>import (unnamed)</h4>
-            <pre><code data-trim data-noescape>
+            <section>
+              <h4>import (unnamed)</h4>
+              <pre><code data-trim data-noescape>
             /* name can be any */
 
             import App from './file.js';
 
             import AnotherAppName from './file.js';
           </code></pre>
+            </section>
           </section>
         </section>
-      </section>
 
-      <section>
         <section>
-          <h3>classes</h3>
-        </section>
-        <section>
-          <h5>example</h5>
-          <pre><code data-trim data-noescape>
+          <section>
+            <h3>classes</h3>
+          </section>
+          <section>
+            <h5>example</h5>
+            <pre><code data-trim data-noescape>
             class Shape {
               constructor(id, x, y) {
                   this.id = id
@@ -439,16 +471,16 @@
               }
             }
           </code></pre>
+          </section>
         </section>
-      </section>
 
-      <section>
         <section>
-          <h3>async / await</h3>
-        </section>
-        <section>
-          <h5>example</h5>
-          <pre><code data-trim data-noescape>
+          <section>
+            <h3>async / await</h3>
+          </section>
+          <section>
+            <h5>example</h5>
+            <pre><code data-trim data-noescape>
             const fetchData = () => {
               /* asynchronous function */
             }
@@ -459,11 +491,11 @@
               console.log('data:', data);
             }
           </code></pre>
-        </section>
+          </section>
 
-        <section>
-          <h5>example - with error handling</h5>
-          <pre><code data-trim data-noescape>
+          <section>
+            <h5>example - with error handling</h5>
+            <pre><code data-trim data-noescape>
             const fetchData = () => {
               /* asynchronous function */
             }
@@ -478,11 +510,11 @@
               }
             }
           </code></pre>
+          </section>
         </section>
-      </section>
-      <section>
-        <h2>Functional programming</h2>
-      </section>
+        <section>
+          <h2>Functional programming</h2>
+        </section>
       </div>
     </div>
 
