@@ -627,6 +627,44 @@
             </ul>
           </section>
         </section>
+
+        <section>
+          <section>
+            <h2>Currying functions</h2>
+          </section>
+
+          <section>
+            <h4>Currying functions - example</h4>
+            <div>template function</div>
+            <pre><code data-trim data-noescape>
+              const getContentTemplate = content => (
+                user => (
+                  `Hello ${user},
+                  ${content}`
+                )
+              );
+            </code></pre>
+
+            <div>template function - call</div>
+            <pre><code data-trim data-noescape>
+              const contentTemplate = getContentTemplate(
+                `You have got a car!`
+              );
+            </code></pre>
+
+            <div>call prepared template</div>
+            <pre><code data-trim data-noescape>
+              contentTemplate('Konrad');
+            </code></pre>
+          </section>
+
+          <section>
+            <div>call 2 functions at once</div>
+            <pre><code data-trim data-noescape>
+              getContentTemplate('You have got a car!')('Konrad');
+            </code></pre>
+          </section>
+        </section>
       </div>
     </div>
 
