@@ -64,7 +64,7 @@
         </section>
 
         <section>
-          <h2>New ECMAScript features</h2>
+          <h1>New ECMAScript features</h1>
         </section>
         <section>
           <section>
@@ -369,61 +369,61 @@
           </section>
         </section>
 
+        <section>
           <section>
-            <section>
-              <h3>object property shorthand</h3>
-            </section>
-            <section>
-              <h5>ES 5</h5>
-              <pre><code data-trim data-noescape>
+            <h3>object property shorthand</h3>
+          </section>
+          <section>
+            <h5>ES 5</h5>
+            <pre><code data-trim data-noescape>
         var x = 0, y = 0;
         obj = { x: x, y: y };
       </code></pre>
 
-              <h5>ES 6</h5>
-              <pre><code data-trim data-noescape>
+            <h5>ES 6</h5>
+            <pre><code data-trim data-noescape>
         const x = 0, y = 0;
         obj = { x, y };
       </code></pre>
-            </section>
           </section>
+        </section>
 
+        <section>
           <section>
-            <section>
-              <h3>exports</h3>
-            </section>
-            <section>
-              <h4>export (named)</h4>
-              <h5>example 1</h5>
-              <pre><code data-trim data-noescape>
+            <h3>exports</h3>
+          </section>
+          <section>
+            <h4>export (named)</h4>
+            <h5>example 1</h5>
+            <pre><code data-trim data-noescape>
             export const App = ({ children }) => {
               return &ltdiv&gt{children}&lt/div&gt;
             }
           </code></pre>
 
-              <h5>example 2</h5>
-              <pre><code data-trim data-noescape>
+            <h5>example 2</h5>
+            <pre><code data-trim data-noescape>
             const App = ({ children }) => {
               return &ltdiv&gt{children}&lt/div&gt;
             }
 
             export { App };
           </code></pre>
-            </section>
+          </section>
 
-            <section>
-              <h4>import (named)</h4>
-              <pre><code data-trim data-noescape>
+          <section>
+            <h4>import (named)</h4>
+            <pre><code data-trim data-noescape>
             // exactly name must be specified
 
             import { App } from './file.js';
           </code></pre>
-            </section>
+          </section>
 
-            <section>
-              <h4>export (unnamed)</h4>
-              <h5>example 1</h5>
-              <pre><code data-trim data-noescape>
+          <section>
+            <h4>export (unnamed)</h4>
+            <h5>example 1</h5>
+            <pre><code data-trim data-noescape>
             const App = ({ children }) => {
               return &ltdiv&gt{children}&lt/div&gt;
             }
@@ -431,24 +431,23 @@
             export default App;
           </code></pre>
 
-              <h5>example 2</h5>
-              <pre><code data-trim data-noescape>
+            <h5>example 2</h5>
+            <pre><code data-trim data-noescape>
             export default ({ children }) => {
               return &ltdiv&gt{children}&lt/div&gt;
             }
           </code></pre>
-            </section>
+          </section>
 
-            <section>
-              <h4>import (unnamed)</h4>
-              <pre><code data-trim data-noescape>
+          <section>
+            <h4>import (unnamed)</h4>
+            <pre><code data-trim data-noescape>
             /* name can be any */
 
             import App from './file.js';
 
             import AnotherAppName from './file.js';
           </code></pre>
-            </section>
           </section>
         </section>
 
@@ -512,8 +511,121 @@
           </code></pre>
           </section>
         </section>
+
         <section>
-          <h2>Functional programming</h2>
+          <h1>Functional programming</h1>
+        </section>
+
+        <section>
+          <section>
+            <h2>Imperative vs. declarative programming</h2>
+          </section>
+
+          <section>
+            <h4>Imperative code</h4>
+            <pre><code data-trim data-noescape>
+              const getTotalFortuneOfTenRichest = richPeople => {
+                richPeople.sort((first, second) => {
+                  return first.money - second.money;
+                });
+
+                let sum = 0;
+            
+                for (let i = 0; i < richPeople.length; i++) {
+                    sum += richPeople[i].money;
+            
+                    if (i >= 10) {
+                        return sum;
+                    }
+                }
+              };
+            </code></pre>
+          </section>
+
+          <section>
+            <h4>Imperative code</h4>
+
+            <ul>
+              <li>sort function mutates the array</li>
+              <li>sum variable is mutable</li>
+              <li>
+                code is hard to read - we declare the execution flow (it looks like
+                alghoritm)
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Declarative code (not fully)</h4>
+            <pre><code data-trim data-noescape>
+              const getTotalFortuneOfTenRichest = richPeople => {
+                return [...richPeople]
+                  .sort((first, second) => first.money - second.money)
+                  .slice(0, 10)
+                  .reduce((total, person) => total + person.money, 0)
+              };
+            </code></pre>
+          </section>
+
+          <section>
+            <h4>Declarative code (not fully)</h4>
+            <ul>
+              <li>[...richPeople] is copy of richPeople - no mutation</li>
+              <li>no redundant variables like <code>sum</code></li>
+              <li>code is easier to read - we define what we expect rather than execution steps</li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Pure functions</h2>
+          </section>
+
+          <section>
+            <h4>Pure function - example 1</h4>
+
+            <pre><code data-trim data-noescape>
+              const double = number => {
+                return number * 2;
+              };
+            </code></pre>
+          </section>
+
+          <section>
+            <h4>Pure function - example 2</h4>
+
+            <pre><code data-trim data-noescape>
+              const factorial = (n) => {
+                if (n === 0) {
+                  return 1;
+                }
+            
+                /* if n=5, it will create an array: [1,2,3,4,5] */
+                const arr = Array(n).fill(n).map(
+                  (num, index) => num - index
+                );
+
+                /* for n=5, 5 * 4 * 3 * 2 * 1 */
+                return arr.reduce((acc, num) => acc * num, 1);
+              }
+            </code></pre>
+            <code>or</code>
+            <pre><code data-trim data-noescape>
+              return arr.reverse().reduce(
+                (acc, num) => acc * num,
+                arr[0]
+              );
+            </code></pre>
+          </section>
+
+          <section>
+            <h4>Pure function - definition</h4>
+            <ul>
+              <li>Given the same input, will always return the same output.</li>
+              <li>Produces no side effects - it does NOT mutate any data.</li>
+            </ul>
+          </section>
         </section>
       </div>
     </div>
