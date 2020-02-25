@@ -845,7 +845,7 @@
           </section>
 
           <section>
-            <h4>Composing components</h4>
+            <h4>Composing components - props</h4>
 
             <pre><code data-trim data-noescape>
               const Welcome = props => {
@@ -862,6 +862,185 @@
                 );
               }
             </code></pre>
+          </section>
+
+          <section>
+            <h4>Fragments</h4>
+            <div>example (incorrect)</div>
+            <pre><code data-trim data-noescape>
+              const App = () => {
+                return (
+                  &lt;div&gt;
+                    &lt;p&gt;element&lt;/p&gt;
+                  &lt;/div&gt;
+                  &lt;div&gt;
+                    &lt;p&gt;element&lt;/p&gt;
+                  &lt;/div&gt;
+                );
+              }
+            </code></pre>
+          </section>
+
+          <section>
+            <h4>Fragments</h4>
+            <div>example (almost correct)</div>
+            <pre><code data-trim data-noescape>
+              // only 1 element can be returned
+              const App = () => {
+                return (
+                  &lt;div&gt;
+                    &lt;div&gt;
+                      &lt;p&gt;element&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div&gt;
+                      &lt;p&gt;element&lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                );
+              }
+            </code></pre>
+          </section>
+
+          <section>
+            <h4>Fragments</h4>
+            <div>example (correct)</div>
+            <pre><code data-trim data-noescape>
+              // only 1 element can be returned
+              const App = () => {
+                return (
+                  &lt;&gt;
+                    &lt;div&gt;
+                      &lt;p&gt;element&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div&gt;
+                      &lt;p&gt;element&lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/&gt;
+                );
+              }
+            </code></pre>
+          </section>
+
+          <section>
+            <h4>Fragments</h4>
+            <div>example 2 (correct)</div>
+            <pre><code data-trim data-noescape>
+              // only 1 element can be returned
+              const App = () => {
+                return (
+                  &lt;React.Fragment&gt;
+                    &lt;div&gt;
+                      &lt;p&gt;element&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div&gt;
+                      &lt;p&gt;element&lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/React.Fragment&gt;
+                );
+              }
+            </code></pre>
+          </section>
+
+          <section>
+            <h4>state</h4>
+
+            <pre><code data-trim data-noescape>
+              class Counter extends React.Component {
+                state = {
+                  counter: 0
+                }
+
+                render() {
+                  return (
+                    &lt;div&gt;
+                      &lt;button onClick={
+                        // do not update state directly!
+                        // It may be asynchronous
+                        () => this.setState(
+                          prevState => prevState.counter++
+                        )
+                      }&gt;
+                        Increase counter
+                      &lt;/button&gt;
+
+                      Counter value: {this.state.counter}
+                    &lt;/div&gt;
+                  );
+                }
+              }
+            </code></pre>
+          </section>
+
+          <section>
+            <h4>Lifecycle</h4>
+          </section>
+
+          <section>
+            <h6>the most important methods</h6>
+
+            <ul>
+              <li>componentDidMount()</li>
+              <li>componentDidUpdate()</li>
+              <li>componentWillUnmount()</li>
+              <br />
+              <li>render()</li>
+              <li>shouldComponentUpdate()</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Lifecycle - mounting component</h4>
+
+            <ul>
+              <li>constructor()</li>
+              <li>getDerivedStateFromProps()</li>
+              <li>render()</li>
+              <li>componentDidMount()</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Lifecycle - updating component</h4>
+
+            <ul>
+              <li>getDerivedStateFromProps()</li>
+              <li>shouldComponentUpdate()</li>
+              <li>render()</li>
+              <li>getSnapshotBeforeUpdate()</li>
+              <li>componentDidUpdate()</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Lifecycle - unmounting component</h4>
+
+            <ul>
+              <li>componentWillUnmount()</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Lifecycle - exceptions</h4>
+
+            <ul>
+              <li>getDerivedStateFromError()</li>
+              <li>componentDidCatch()</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Summary</h4>
+
+            <ul>
+              <li>components can be nested/combined</li>
+              <li>
+                components can render other components, HTML elements, fragments
+                etc.
+              </li>
+              <li>props/state change trigger component re-render</li>
+              <li>props are read-only (components are pure functions)</li>
+              <li>components has own lifecycle</li>
+            </ul>
           </section>
         </section>
       </div>
