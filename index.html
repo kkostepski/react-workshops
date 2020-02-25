@@ -549,8 +549,8 @@
               <li>sort function mutates the array</li>
               <li>sum variable is mutable</li>
               <li>
-                code is hard to read - we declare the execution flow (it looks like
-                alghoritm)
+                code is hard to read - we declare the execution flow (it looks
+                like alghoritm)
               </li>
             </ul>
           </section>
@@ -572,7 +572,10 @@
             <ul>
               <li>[...richPeople] is copy of richPeople - no mutation</li>
               <li>no redundant variables like <code>sum</code></li>
-              <li>code is easier to read - we define what we expect rather than execution steps</li>
+              <li>
+                code is easier to read - we define what we expect rather than
+                execution steps
+              </li>
             </ul>
           </section>
         </section>
@@ -662,6 +665,202 @@
             <div>call 2 functions at once</div>
             <pre><code data-trim data-noescape>
               getContentTemplate('You have got a car!')('Konrad');
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <h2>React fundamentals</h2>
+        </section>
+
+        <section>
+          <section>
+            <h4>What is React?</h4>
+          </section>
+
+          <section>
+            <div>JavaScript library for building user interfaces</div>
+            <div>(created by Facebook)</div>
+          </section>
+
+          <section>
+            <ul>
+              <li>It is NOT a framework</li>
+              <li>It is NOT opinionated (unlike Angular)</li>
+              <li>It is component-based</li>
+              <li>It uses custom syntax - JSX</li>
+              <li>It has no DSL* (unlike Angular)</li>
+              <li>It uses Virtual DOM</li>
+            </ul>
+            <hr />
+            <small>(*) Domain-specific Language</small>
+          </section>
+
+          <section>
+            <h4>Virtual DOM</h4>
+
+            <ul>
+              <li>Data structure, which represents real DOM</li>
+              <li>
+                During change, React compares changes on this structure and
+                knows what part of DOM should be updated
+              </li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h4>JSX</h4>
+            <h5>(JavaScript XML -> JS + HTML combined)</h5>
+          </section>
+
+          <section>
+            <h4>example 1</h4>
+            <pre><code data-trim data-noescape>
+              const name = 'Joe Doe';
+              const element = &lth1&gtHello, {name}&lt/h1&gt;
+
+              ReactDOM.render(
+                element,
+                document.getElementById('root')
+              );
+            </code></pre>
+          </section>
+
+          <section>
+            <h4>example 2</h4>
+            <pre><code data-trim data-noescape>
+              const formatName = ({firstName, lastName}) => {
+                return `${firstName} ${lastName}`
+              };
+              
+              const user = {
+                firstName: 'Joe',
+                lastName: 'Doe'
+              };
+              
+              const element = (
+                &lth1&gt
+                  Hello, {formatName(user)}!
+                &lt/h1&gt;
+              );
+              
+              ReactDOM.render(
+                element,
+                document.getElementById('root')
+              );
+            </code></pre>
+          </section>
+
+          <section>
+            <h4>DOM attributes (camelCase)</h4>
+            <div>example 1</div>
+            <pre><code data-trim data-noescape>
+              const element = &lt;div tabIndex="0"&gt;&lt;/div&gt;;
+            </code></pre>
+
+            <div>example 2</div>
+            <pre><code data-trim data-noescape>
+              const element = &lt;form noValidate&gt;&lt;/form&gt;;
+            </code></pre>
+          </section>
+
+          <section>
+            <h4>DOM attributes (special)</h4>
+            <div>example 1</div>
+            <pre><code data-trim data-noescape>
+              const element = &lt;div className="css-class"&gt;&lt;/div&gt;;
+            </code></pre>
+
+            <div>example 2</div>
+            <pre><code data-trim data-noescape>
+              const element = &lt;label htmlFor="field-id"&gt;&lt;/label&gt;;
+            </code></pre>
+          </section>
+
+          <section>
+            <h4>DOM attributes (styles - camelcase)</h4>
+            <div>example</div>
+            <pre><code data-trim data-noescape>
+              &lt;div style={{
+                backgroundColor: '#000',
+                color: '#fff',
+                textAlign: 'center'
+              }}&gt;&lt;/div&gt;;
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section><h4>Components</h4></section>
+
+          <section>
+            <h4>Components</h4>
+
+            <ul>
+              <li>Pure functions, which contains JSX</li>
+              <li>
+                Should be named PascalCase (React cannot confuse components with
+                HTML tags)
+              </li>
+              <li>Has lifecycle</li>
+              <li>Has state</li>
+              <li>Has props</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Class component</h4>
+
+            <pre><code data-trim data-noescape>
+              class MyComponent extends React.Component {
+                name = 'React'
+
+                render() {
+                  return (
+                    &lt;div&gt;
+                      Welcome {this.name}!
+                    &lt;/div&gt;
+                  )
+                }
+              }
+            </code></pre>
+          </section>
+
+          <section>
+            <h4>Function component</h4>
+
+            <pre><code data-trim data-noescape>
+              const MyComponent = () => {
+                const name = 'React'
+
+                return (
+                  &lt;div&gt;
+                    Welcome {name}!
+                  &lt;/div&gt;
+                )
+              }
+            </code></pre>
+          </section>
+
+          <section>
+            <h4>Composing components</h4>
+
+            <pre><code data-trim data-noescape>
+              const Welcome = props => {
+                return &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;
+              }
+              
+              const App = () => {
+                return (
+                  &lt;div&gt;
+                    &lt;Welcome name="Sara" /&gt;
+                    &lt;Welcome name="Cahal" /&gt;
+                    &lt;Welcome name="Edite" /&gt;
+                  &lt;/div&gt;
+                );
+              }
             </code></pre>
           </section>
         </section>
