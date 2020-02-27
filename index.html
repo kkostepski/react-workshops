@@ -117,6 +117,22 @@
 				    </code></pre>
           </section>
           <section>
+            <h4>example - let vs. var</h4>
+            <pre><code data-trim data-noescape>
+              let x = 1;
+
+              if (x === 1) {
+                let x = 2;
+
+                /* console.log(x); */
+                /* expected output: 2 */
+              }
+
+              /* console.log(x); */
+              /* expected output: 1 */
+				    </code></pre>
+          </section>
+          <section>
             <h4>example 1 - let vs. const</h4>
             <h5>let</h5>
             <pre><code data-trim data-noescape>
@@ -159,11 +175,11 @@
             <h4>Declaring function</h4>
             <h5>ES 5</h5>
             <pre><code data-trim data-noescape>
-              var a = function() {
+              function a() {
                 return 'a';
               }
 
-              function a() {
+              var a = function() {
                 return 'a';
               }
             </code></pre>
@@ -183,11 +199,37 @@
 
           <section>
             <h4>Lexical this</h4>
-            <h5>ES 5</h5>
+            <h5>ES 5 - without binding</h5>
             <pre><code data-trim data-noescape>
-              var a = (function() {
-                return 'a';
-              }).bind(this);              
+              function A() {
+                this.a = 123;
+              
+                return {
+                  hello: function() {
+                    return this.a;
+                  }
+                }
+              }
+              
+              A().hello();
+            </code></pre>
+          </section>
+
+          <section>
+            <h4>Lexical this</h4>
+            <h5>ES 5 - with binding</h5>
+            <pre><code data-trim data-noescape>
+              function A() {
+                this.a = 123;
+              
+                return {
+                  hello: (function() {
+                    return this.a;
+                  }).bind(this)
+                }
+              }
+              
+              A().hello();
             </code></pre>
           </section>
 
@@ -195,9 +237,17 @@
             <h4>Lexical this</h4>
             <h5>ES 6</h5>
             <pre><code data-trim data-noescape>
-              const a = () => {
-                return 'a';
+              const A = () => {
+                this.a = 123;
+              
+                return {
+                  hello: () => {
+                    return this.a;
+                  }
+                }
               }
+
+              A().hello();
             </code></pre>
           </section>
         </section>
@@ -243,6 +293,9 @@
                 
                 return a + ',' + b + ',' + rest.join(',');
               };
+
+              func(1, 2, 3, 4, 5, 6, 7);
+              /* output: 1,2,3,4,5,6,7 */
             </code></pre>
           </section>
 
@@ -263,7 +316,8 @@
             <h4>spread operator</h4>
             <h5>ES 5</h5>
             <pre><code data-trim data-noescape>
-              var params = [4, 5, 6];
+              var params = [1, 2, 3];
+              var params2 = [4, 5, 6];
 
               [1, 2, 3].concat(params2); /* [1,2,3,4,5,6] */
             </code></pre>
@@ -273,7 +327,8 @@
             <h4>spread operator</h4>
             <h5>ES 6</h5>
             <pre><code data-trim data-noescape>
-              const params = [4, 5, 6];
+              const params = [1, 2, 3];
+              const params2 = [4, 5, 6];
 
               [1, 2, 3, ...params2]; /* [1,2,3,4,5,6] */
             </code></pre>
@@ -327,20 +382,20 @@
             <div>example 1</div>
             <pre><code data-trim data-noescape>
           const func = (props) {
-            const { name, value } = props;
-            console.log(name, value);
+            const { name, age } = props;
+            console.log(name, age);
           }
         </code></pre>
             <div>example 2</div>
             <pre><code data-trim data-noescape>
-          const func = ({ name, value }) {
-            console.log(name, value);
+          const func = ({ name, age }) {
+            console.log(name, age);
           }
         </code></pre>
             <div>equivalent to:</div>
             <pre><code data-trim data-noescape>
           const func = (props) {
-            console.log(props.name, props.value);
+            console.log(props.name, props.age);
           }
         </code></pre>
           </section>
@@ -662,6 +717,7 @@
             <div>call prepared template</div>
             <pre><code data-trim data-noescape>
               contentTemplate('Konrad');
+              /* Hello Konrad, You have got a car! */
             </code></pre>
           </section>
 
@@ -669,6 +725,7 @@
             <div>call 2 functions at once</div>
             <pre><code data-trim data-noescape>
               getContentTemplate('You have got a car!')('Konrad');
+              /* Hello Konrad, You have got a car! */
             </code></pre>
           </section>
         </section>
@@ -722,6 +779,8 @@
           <section>
             <h4>example 1</h4>
             <pre><code data-trim data-noescape>
+              import ReactDOM from 'react-dom';
+
               const name = 'Joe Doe';
               const element = &lth1&gtHello, {name}&lt/h1&gt;
 
@@ -735,8 +794,10 @@
           <section>
             <h4>example 2</h4>
             <pre><code data-trim data-noescape>
+              import ReactDOM from 'react-dom';
+
               const formatName = ({firstName, lastName}) => {
-                return `${firstName} ${lastName}`
+                return `${firstName} ${lastName}`;
               };
               
               const user = {
@@ -767,6 +828,19 @@
             <div>example 2</div>
             <pre><code data-trim data-noescape>
               const element = &lt;form noValidate&gt;&lt;/form&gt;;
+            </code></pre>
+          </section>
+
+          <section>
+            <h4>DOM attributes (dash)</h4>
+            <div>example 1</div>
+            <pre><code data-trim data-noescape>
+              const element = &lt;div data-id="1"&gt;&lt;/div&gt;;
+            </code></pre>
+
+            <div>example 2</div>
+            <pre><code data-trim data-noescape>
+              const element = &lt;button aria-label="Click me"&gt;&lt;/button&gt;;
             </code></pre>
           </section>
 
@@ -803,10 +877,10 @@
             <h4>Components</h4>
 
             <ul>
-              <li>Pure functions, which contains JSX</li>
+              <li>Pure functions or classes, which contains JSX</li>
               <li>
-                Should be named PascalCase (React cannot confuse components with
-                HTML tags)
+                Their names should start with capital letter (ideally
+                PascalCase).React cannot confuse components with HTML tags
               </li>
               <li>Has lifecycle</li>
               <li>Has state</li>
@@ -818,6 +892,8 @@
             <h4>Class component</h4>
 
             <pre><code data-trim data-noescape>
+              import React from 'react';
+
               class MyComponent extends React.Component {
                 name = 'React'
 
@@ -869,7 +945,7 @@
           </section>
 
           <section>
-            <h4>Fragments</h4>
+            <h4>React Fragments</h4>
             <div>example (incorrect)</div>
             <pre><code data-trim data-noescape>
               const App = () => {
@@ -886,7 +962,7 @@
           </section>
 
           <section>
-            <h4>Fragments</h4>
+            <h4>React Fragments</h4>
             <div>example (almost correct)</div>
             <pre><code data-trim data-noescape>
               // only 1 element can be returned
@@ -906,7 +982,7 @@
           </section>
 
           <section>
-            <h4>Fragments</h4>
+            <h4>React Fragments</h4>
             <div>example (correct)</div>
             <pre><code data-trim data-noescape>
               // only 1 element can be returned
@@ -926,9 +1002,11 @@
           </section>
 
           <section>
-            <h4>Fragments</h4>
+            <h4>React Fragments</h4>
             <div>example 2 (correct)</div>
             <pre><code data-trim data-noescape>
+              import React from 'react';
+
               // only 1 element can be returned
               const App = () => {
                 return (
@@ -960,9 +1038,9 @@
                       &lt;button onClick={
                         // do not update state directly!
                         // It may be asynchronous
-                        () => this.setState(
-                          prevState => prevState.counter++
-                        )
+                        () => this.setState({
+                          counter: this.state.counter++
+                        })
                       }&gt;
                         Increase counter
                       &lt;/button&gt;
@@ -993,11 +1071,47 @@
           </section>
 
           <section>
+            <h6>lifecycle - example</h6>
+
+            <pre><code data-trim data-noescape>
+              class MyComponent extends React.Component {
+                
+                componentDidMount() {
+                  // will be called after mount
+                }
+                
+                componentDidUpdate() {
+                  // will be called after update
+                }
+
+                componentWillUnmount() {
+                  // will be called before unmount
+                }
+
+                shouldComponentUpdate(nextProps, nextState) {
+                  if (nextProps.name !== this.props.name) {
+                    return true;
+                  }
+
+                  return false;
+                }
+
+                render() {
+                  return (
+                    &lt;div&gt;&lt;/div&gt;
+                  )
+                }
+              }
+            </code></pre>
+          </section>
+
+          <section>
             <h4>Lifecycle - mounting component</h4>
 
+            <div>These methods will be called in the following order:</div>
             <ul>
               <li>constructor()</li>
-              <li>getDerivedStateFromProps()</li>
+              <li>getDerivedStateFromProps(props, state)</li>
               <li>render()</li>
               <li>componentDidMount()</li>
             </ul>
@@ -1006,12 +1120,13 @@
           <section>
             <h4>Lifecycle - updating component</h4>
 
+            <div>These methods will be called in the following order:</div>
             <ul>
-              <li>getDerivedStateFromProps()</li>
+              <li>getDerivedStateFromProps(props, state)</li>
               <li>shouldComponentUpdate()</li>
               <li>render()</li>
-              <li>getSnapshotBeforeUpdate()</li>
-              <li>componentDidUpdate()</li>
+              <li>getSnapshotBeforeUpdate(prevProps, prevState)</li>
+              <li>componentDidUpdate(prevProps, prevState, snapshot)</li>
             </ul>
           </section>
 
@@ -1026,8 +1141,9 @@
           <section>
             <h4>Lifecycle - exceptions</h4>
 
+            <div>These methods will be called in the following order:</div>
             <ul>
-              <li>getDerivedStateFromError()</li>
+              <li>getDerivedStateFromError(error)</li>
               <li>componentDidCatch()</li>
             </ul>
           </section>
@@ -1128,7 +1244,7 @@
             <pre><code data-trim data-noescape>
               import { useEffect } from 'react';
 
-              const MyComponent = () => {
+              const MyComponent = props => {
                 useEffect(() => {
                   const subscription = props.source.subscribe();
 
@@ -1152,7 +1268,7 @@
                 etc.
               </li>
 
-              <li>props/state change trigger UI update</li>
+              <li>props/state change trigger UI update (real DOM)</li>
               <li>props are read-only (components are pure functions)</li>
               <li>class components has own lifecycle</li>
               <li>in function components you can use hooks</li>
