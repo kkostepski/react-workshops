@@ -20,6 +20,10 @@
       section h4 {
         color: #f92672 !important;
       }
+
+      section h4.no-capitalize {
+        text-transform: inherit;
+      }
     </style>
 
     <!-- Printing and PDF exports -->
@@ -670,7 +674,7 @@
         </section>
 
         <section>
-          <h2>React fundamentals</h2>
+          <h1>React fundamentals</h1>
         </section>
 
         <section>
@@ -972,7 +976,7 @@
           </section>
 
           <section>
-            <h4>Lifecycle</h4>
+            <h4>Class components - lifecycle</h4>
           </section>
 
           <section>
@@ -1029,18 +1033,312 @@
           </section>
 
           <section>
+            <h4>Function components - hooks</h4>
+          </section>
+
+          <section>
+            <h4 class="no-capitalize">useState()</h4>
+            <div>example</div>
+            <pre><code data-trim data-noescape>
+              import { useState } from 'react';
+
+              const MyComponent = () => {
+                const [name, setName] = useState('unknown');
+
+                return (
+                  &lt;&gt;
+                    &lt;button onClick={() => setName('John')}&gt;
+                      Click to set name
+                    &lt;/button&gt;
+
+                    Welcome {name}!
+                  &lt;&gt;
+                )
+              }
+            </code></pre>
+          </section>
+
+          <section>
+            <h4 class="no-capitalize">useEffect()</h4>
+            <div>componentDidUpdate</div>
+            <pre><code data-trim data-noescape>
+              import { useEffect } from 'react';
+
+              const MyComponent = () => {
+                // it will call every rerender
+                useEffect(() => {
+                  const name = 'Joe';
+                });
+              }
+            </code></pre>
+          </section>
+
+          <section>
+            <h4 class="no-capitalize">useEffect()</h4>
+            <div>componentDidMount</div>
+            <pre><code data-trim data-noescape>
+              import { useEffect } from 'react';
+
+              const MyComponent = () => {
+                useEffect(() => {
+                  const name = 'Joe';
+                }, []); // it will call only on first render
+              }
+            </code></pre>
+          </section>
+
+          <section>
+            <h4 class="no-capitalize">useEffect()</h4>
+            <div>componentDidMount</div>
+            <pre><code data-trim data-noescape>
+              import { useEffect } from 'react';
+
+              const MyComponent = () => {
+                useEffect(() => {
+                  const name = 'Joe';
+                  // it will call only on first render 
+                  // and if name has changed
+                }, [name]);
+              }
+            </code></pre>
+          </section>
+
+          <section>
+            <h4 class="no-capitalize">useEffect()</h4>
+            <div>componentDidMount / componentWillUmnount</div>
+            <pre><code data-trim data-noescape>
+              import { useEffect } from 'react';
+
+              const MyComponent = () => {
+                useEffect(() => {
+                  console.log('mounted'); // it will call on first render
+
+                  return () => {
+                    // it will call on component unmounting
+                    console.log('unmounting...');
+                  }
+                }, []);
+              }
+            </code></pre>
+          </section>
+
+          <section>
+            <h4 class="no-capitalize">useEffect()</h4>
+            <div>example - componentWillUnmount</div>
+            <pre><code data-trim data-noescape>
+              import { useEffect } from 'react';
+
+              const MyComponent = () => {
+                useEffect(() => {
+                  const subscription = props.source.subscribe();
+
+                  return () => {
+                    // Clean up the subscription
+                    subscription.unsubscribe();
+                  };
+                });
+              }
+            </code></pre>
+          </section>
+
+          <section>
             <h4>Summary</h4>
 
             <ul>
-              <li>components can be nested/combined</li>
+              <li>components has local state</li>
+              <li>communication between them - e.g. props</li>
               <li>
                 components can render other components, HTML elements, fragments
                 etc.
               </li>
+
               <li>props/state change trigger UI update</li>
               <li>props are read-only (components are pure functions)</li>
-              <li>components has own lifecycle</li>
+              <li>class components has own lifecycle</li>
+              <li>in function components you can use hooks</li>
             </ul>
+          </section>
+        </section>
+
+        <section>
+          <h1>React workshops</h1>
+        </section>
+
+        <section>
+          <h2>Create react app</h2>
+
+          <h4 class="no-capitalize">generate app with CRA</h4>
+        </section>
+
+        <section>
+          <h2>Stateful components</h2>
+
+          <h4 class="no-capitalize">
+            Create dummy component (stateful) with componentDidMount hook
+          </h4>
+        </section>
+
+        <section>
+          <h2>Stateless components</h2>
+
+          <h4 class="no-capitalize">
+            Create "Person" component, which will render text "Hello unknown"
+          </h4>
+        </section>
+
+        <section>
+          <h2>Conditional rendering</h2>
+
+          <div style="text-align:left">
+            <ol>
+              <li>
+                <h4 class="no-capitalize">
+                  Add props: name, surname to component
+                </h4>
+              </li>
+              <li>
+                <h4 class="no-capitalize">
+                  Render "Hello [name] [surname] if prop name/surname has been
+                  provided"
+                </h4>
+              </li>
+              <li>
+                <h4 class="no-capitalize">
+                  Otherwise render "Hello unknown"
+                </h4>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <section>
+          <h2>Render data (collection)</h2>
+
+          <div style="text-align:left">
+            <ol>
+              <li>
+                <h4 class="no-capitalize">
+                  Create array of 3 objects: { name, surname, id }
+                </h4>
+              </li>
+              <li>
+                <h4 class="no-capitalize">
+                  Render all items using component "Person"
+                </h4>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <section>
+          <h2>Styling components</h2>
+
+          <div style="text-align:left">
+            <ol>
+              <li>
+                <h4 class="no-capitalize">
+                  Style "Person" using SCSS
+                </h4>
+              </li>
+              <li>
+                <h4 class="no-capitalize">
+                  Style "Person" using styled-components
+                </h4>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <section>
+          <h2>Local state</h2>
+
+          <div style="text-align:left">
+            <ol>
+              <li>
+                <h4 class="no-capitalize">
+                  Create "Counter" functional component
+                </h4>
+              </li>
+              <li>
+                <h4 class="no-capitalize">
+                  using "useState" hook implement simple counter with 2 buttons:
+                  increase / decrease
+                </h4>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <section>
+          <h2>Local state</h2>
+
+          <div style="text-align:left">
+            <ol>
+              <li>
+                <h4 class="no-capitalize">
+                  Create "CounterClass" class component
+                </h4>
+              </li>
+              <li>
+                <h4 class="no-capitalize">
+                  using "setState" method implement simple counter with 2
+                  buttons: increase / decrease
+                </h4>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <section>
+          <section>
+            <h2>Forms</h2>
+
+            <div style="text-align:left">
+              <ol>
+                <li>
+                  <h4 class="no-capitalize">
+                    Create "ContactForm" component with elements
+
+                    <ul>
+                      <li>name (input text)</li>
+                      <li>email (input email)</li>
+                      <li>body (textarea)</li>
+                      <li>submit button</li>
+                    </ul>
+                  </h4>
+                </li>
+              </ol>
+            </div>
+          </section>
+
+          <section>
+            <h2>Forms</h2>
+
+            <div style="text-align:left">
+              <ol start="2">
+                <li>
+                  <h4 class="no-capitalize">
+                    Implement validation
+
+                    <ul>
+                      <li>name: minimum 2 chars</li>
+                      <li>mail: at least "@" char and 3 chars</li>
+                      <li>body: not empty</li>
+                    </ul>
+                  </h4>
+                </li>
+                <li>
+                  <h4 class="no-capitalize">
+                    If any validation fail, display relevant validation message
+                  </h4>
+                </li>
+                <li>
+                  <h4 class="no-capitalize">
+                    If validation pass, display "thank you" above the form
+                  </h4>
+                </li>
+              </ol>
+            </div>
           </section>
         </section>
       </div>
